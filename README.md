@@ -359,6 +359,7 @@ void deleteLast(List &L, address &P);
 void deleteAfter(address Prec, address &P);
 
 #endif
+
 ```
  ⁠
 Output
@@ -465,12 +466,13 @@ void deleteAfter(address Prec, address &P) {
         P->prev = NULL;
     }
 }
+
 ```
 
 Output 
 	⁠![Output Soal 2](https://github.com/chafdv/Modul-6/blob/main/Output/maincpp2.png)
 
-Kode ini berisi fungsi untuk membuat, menambah, menampilkan, mencari, dan menghapus data pada **doubly linked list** yang berisi informasi kendaraan. Setiap node terhubung dua arah sehingga data bisa diakses dan dihapus dari depan maupun belakang dengan mudah.
+Kode ini berisi fungsi untuk membuat, menambah, menampilkan, mencari, dan menghapus data pada doubly linked list yang berisi informasi kendaraan. Setiap node terhubung dua arah sehingga data bisa diakses dan dihapus dari depan maupun belakang dengan mudah.
 
 ---
 
@@ -546,12 +548,13 @@ int main() {
 
     return 0;
 }
-```⁠
+
+```
+
 Output 
 	⁠![Output Soal 3](https://github.com/chafdv/Modul-6/blob/main/Output/maincpp3.png)
 
-Program ini membuat singly linked list berisi 1 → 2 → 3, lalu membalik urutannya menjadi 3 → 2 → 1 menggunakan 3 pointer (prev, current, next) untuk memutar arah pointer satu per satu.
-
+Kode tersebut berfungsi untuk mengelola data kendaraan menggunakan **doubly linked list**. Program meminta pengguna memasukkan beberapa data kendaraan, lalu menampilkannya. Setelah itu, pengguna dapat mencari data berdasarkan nomor polisi dan menghapus data tersebut baik di awal, tengah, maupun akhir list.
 
 ## Referensi
 
