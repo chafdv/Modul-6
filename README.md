@@ -3,7 +3,7 @@
 
 ## Dasar Teori
 
-Singly Linked List adalah struktur data linier yang terdiri dari sekumpulan node, di mana setiap node berisi data dan pointer ke node berikutnya. Tidak seperti array, elemen-elemen pada linked list tidak disimpan secara berurutan di memori. Keuntungan utamanya adalah kemudahan dalam menambah atau menghapus elemen tanpa perlu menggeser data seperti pada array. Namun, pencarian data membutuhkan traversal dari node awal (head) hingga node yang dicari karena tidak ada akses langsung ke indeks. Operasi umum pada singly linked list meliputi insert, delete, traverse, dan search.
+Doubly linked list adalah struktur data yang lebih kompleks dibandingkan dengan singly linked list, tetapi memiliki beberapa keunggulan. Keunggulan utamanya adalah memungkinkan penelusuran data secara efisien ke dua arah. Hal ini karena setiap node dalam daftar memiliki pointer ke node sebelumnya dan pointer ke node berikutnya. Dengan begitu, proses penyisipan dan penghapusan node dapat dilakukan dengan cepat dan mudah, serta penelusuran data bisa dilakukan dari kedua arah.
 
 ## Guided
 
