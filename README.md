@@ -9,7 +9,7 @@ Doubly linked list adalah struktur data yang lebih kompleks dibandingkan dengan 
 
 ### Soal 1
 
-```⁠ cpp
+```cpp
 #include <iostream>
 using namespace std;
 
@@ -304,8 +304,8 @@ int main() {
 
     return 0;
 }
-
 ```
+ 
 Output
 ⁠![Output guided](https://github.com/chafdv/Modul-6/blob/main/Output/guided6.png)
 
