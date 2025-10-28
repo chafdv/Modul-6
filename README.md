@@ -307,9 +307,9 @@ int main() {
 
 ```
 Output
-⁠![Output Soal 1](https://github.com/salfiayu/Modul-4/blob/main/Modul%204/screenshoot/Screenshot%20(85).png)
+⁠![Output guided](https://github.com/chafdv/Modul-6/blob/main/Output/guided6.png)
 
-Kode tersebut merupakan program **Doubly Linked List** dalam bahasa **C++** yang berfungsi untuk mengelola data secara dua arah (maju dan mundur). Program ini memungkinkan pengguna menambah, menghapus, memperbarui, dan menampilkan data melalui menu interaktif. Setiap node memiliki pointer ke node sebelumnya dan berikutnya, sehingga data dapat diakses dari kedua arah dengan mudah. Tujuannya adalah untuk mempermudah pengelolaan data secara dinamis menggunakan struktur list dua arah.
+Kode tersebut merupakan program Doubly Linked List dalam bahasa C++ yang berfungsi untuk mengelola data secara dua arah (maju dan mundur). Program ini memungkinkan pengguna menambah, menghapus, memperbarui, dan menampilkan data melalui menu interaktif. Setiap node memiliki pointer ke node sebelumnya dan berikutnya, sehingga data dapat diakses dari kedua arah dengan mudah. Tujuannya adalah untuk mempermudah pengelolaan data secara dinamis menggunakan struktur list dua arah.
 
 ---
 
@@ -317,140 +317,238 @@ Kode tersebut merupakan program **Doubly Linked List** dalam bahasa **C++** yang
 
 ### Soal 1
 
-buatlah single linked list untuk Antrian yang menyimpan data pembeli( nama dan pesanan). program memiliki beberapa menu seperti tambah antrian,  layani antrian(hapus), dan tampilkan antrian. \*antrian pertama harus yang pertama dilayani
+Buatlah implementasi ADT Doubly Linked list pada file “Doublylist.cpp” dan coba hasil implementasi ADT pada file “main.cpp”.
 
-⁠ cpp
+```cpp
+#ifndef DOUBLYLIST_H
+#define DOUBLYLIST_H
+
 #include <iostream>
 #include <string>
 using namespace std;
 
-struct Antrian {
-    string nama;
-    string pesanan;
-    Antrian* next;
+struct Kendaraan {
+    string nopol;
+    string warna;
+    int thnBuat;
 };
 
-Antrian* head = nullptr;
-Antrian* tail = nullptr;
+typedef Kendaraan infotype;
 
-void tambahAntrian(string nama, string pesanan) {
-    Antrian* baru = new Antrian();
-    baru->nama = nama;
-    baru->pesanan = pesanan;
-    baru->next = nullptr;
+struct ElmList {
+    infotype info;
+    ElmList* next;
+    ElmList* prev;
+};
 
-    if (head == nullptr) {
-        head = tail = baru;
-    } else {
-        tail->next = baru;
-        tail = baru;
-    }
-    cout << "Antrian " << nama << " berhasil ditambahkan.\n";
-}
+typedef ElmList* address;
 
-void layaniAntrian() {
-    if (head == nullptr) {
-        cout << "Antrian kosong.\n";
-        return;
-    }
+struct List {
+    address First;
+    address Last;
+};
 
-    Antrian* temp = head;
-    cout << "Melayani antrian: " << temp->nama << " - " << temp->pesanan << endl;
-    head = head->next;
-    delete temp;
+void CreateList(List &L);
+address alokasi(infotype x);
+void dealokasi(address &P);
+void printInfo(List L);
+void insertLast(List &L, address P);
+address findElm(List L, string nopol);
+void deleteFirst(List &L, address &P);
+void deleteLast(List &L, address &P);
+void deleteAfter(address Prec, address &P);
 
-    if (head == nullptr) {
-        tail = nullptr;
-    }
-}
-
-void tampilAntrian() {
-    if (head == nullptr) {
-        cout << "Antrian kosong.\n";
-        return;
-    }
-
-    Antrian* temp = head;
-    cout << "\n=== DAFTAR ANTRIAN ===\n";
-    while (temp != nullptr) {
-        cout << temp->nama << " - " << temp->pesanan << endl;
-        temp = temp->next;
-    }
-}
-
-int main() {
-    int pilihan;
-    string nama, pesanan;
-
-    do {
-        cout << "\n=== MENU ANTRIAN ===\n";
-        cout << "1. Tambah Antrian\n";
-        cout << "2. Layani Antrian\n";
-        cout << "3. Tampilkan Antrian\n";
-        cout << "0. Keluar\n";
-        cout << "Pilih: ";
-        cin >> pilihan;
-        cin.ignore();
-
-        switch (pilihan) {
-            case 1:
-                cout << "Masukkan nama    : ";
-                getline(cin, nama);
-                cout << "Masukkan pesanan : ";
-                getline(cin, pesanan);
-                tambahAntrian(nama, pesanan);
-                break;
-            case 2:
-                layaniAntrian();
-                break;
-            case 3:
-                tampilAntrian();
-                break;
-            case 0:
-                cout << "Program selesai.\n";
-                break;
-            default:
-                cout << "Pilihan tidak valid!\n";
-        }
-    } while (pilihan != 0);
-
-    return 0;
-}
-
+#endif
+```
  ⁠
+Output
+	⁠![Output Soal 1](https://github.com/chafdv/Modul-6/blob/main/Output/maincpp1.png)
 
-	⁠Screenshoot  
-	⁠![Screenshot Soal 1](https://github.com/salfiayu/Modul-4/blob/main/Modul%204/screenshoot/Screenshot%20(86).png)
-
-Program ini menggunakan singly linked list untuk membuat sistem antrian. Data pembeli masuk ke belakang, dilayani dari depan (FIFO). Tersedia menu untuk tambah, layani (hapus depan), dan tampilkan seluruh antrian.
+Kode tersebut adalah header file untuk program Doubly Linked List yang menyimpan data kendaraan. Di dalamnya terdapat struktur node dengan pointer ke elemen sebelum dan sesudahnya, serta deklarasi fungsi untuk membuat, menambah, mencari, menampilkan, dan menghapus data pada list.
 
 ---
 
 ### Soal 2
 
-buatlah program kode untuk membalik (reverse) singly linked list (1-2-3 menjadi 3-2-1) 
+Carilah elemen dengan nomor polisi D001 dengan membuat fungsi baru.
 
-⁠ cpp
-#include <iostream>
-#include "pelajaran.h"
-using namespace std;
+```cpp
+#include "doublylist.h"
 
-Pelajaran create_pelajaran(string namaPel, string kodePel) {
-    Pelajaran p;
-    p.namaMapel = namaPel;
-    p.kodeMapel = kodePel;
-    return p;
+void CreateList(List &L) {
+    L.First = NULL;
+    L.Last = NULL;
 }
 
-void tampil_pelajaran(Pelajaran pel) {
-    cout << "nama pelajaran : " << pel.namaMapel << endl;
-    cout << "nilai          : " << pel.kodeMapel << endl;
+address alokasi(infotype x) {
+    address P = new ElmList;
+    P->info = x;
+    P->next = NULL;
+    P->prev = NULL;
+    return P;
 }
 
- ⁠
+void dealokasi(address &P) {
+    delete P;
+    P = NULL;
+}
 
-	⁠Sreenshoot 
-	⁠![Screenshot Soal 2](https://github.com/salfiayu/Modul-4/blob/main/Modul%204/screenshoot/Screenshot%20(87).png)
+void printInfo(List L) {
+    address P = L.First;
+    while (P != NULL) {
+        cout << "Nomor Polisi : " << P->info.nopol << endl;
+        cout << "Warna        : " << P->info.warna << endl;
+        cout << "Tahun        : " << P->info.thnBuat << endl;
+        cout << "------------------------------" << endl;
+        P = P->next;
+    }
+}
+
+void insertLast(List &L, address P) {
+    if (L.First == NULL) {
+        L.First = P;
+        L.Last = P;
+    } else {
+        L.Last->next = P;
+        P->prev = L.Last;
+        L.Last = P;
+    }
+}
+
+address findElm(List L, string nopol) {
+    address P = L.First;
+    while (P != NULL) {
+        if (P->info.nopol == nopol) {
+            return P;
+        }
+        P = P->next;
+    }
+    return NULL;
+}
+
+void deleteFirst(List &L, address &P) {
+    if (L.First != NULL) {
+        P = L.First;
+        if (L.First == L.Last) {
+            L.First = NULL;
+            L.Last = NULL;
+        } else {
+            L.First = L.First->next;
+            L.First->prev = NULL;
+        }
+        P->next = NULL;
+    }
+}
+
+void deleteLast(List &L, address &P) {
+    if (L.First != NULL) {
+        P = L.Last;
+        if (L.First == L.Last) {
+            L.First = NULL;
+            L.Last = NULL;
+        } else {
+            L.Last = L.Last->prev;
+            L.Last->next = NULL;
+        }
+        P->prev = NULL;
+    }
+}
+
+void deleteAfter(address Prec, address &P) {
+    if (Prec != NULL && Prec->next != NULL) {
+        P = Prec->next;
+        Prec->next = P->next;
+        if (P->next != NULL) {
+            P->next->prev = Prec;
+        }
+        P->next = NULL;
+        P->prev = NULL;
+    }
+}
+```
+
+Output 
+	⁠![Output Soal 2](https://github.com/chafdv/Modul-6/blob/main/Output/maincpp2.png)
+
+Kode ini berisi fungsi untuk membuat, menambah, menampilkan, mencari, dan menghapus data pada **doubly linked list** yang berisi informasi kendaraan. Setiap node terhubung dua arah sehingga data bisa diakses dan dihapus dari depan maupun belakang dengan mudah.
+
+---
+
+### Soal 3
+
+Hapus elemen dengan nomor polisi D003 dengan procedure delete.
+
+⁠```cpp
+#include "doublylist.h"
+
+int main() {
+    List L;
+    CreateList(L);
+
+    int n;
+    cout << "Masukkan jumlah kendaraan: ";
+    cin >> n;
+
+    for (int i = 0; i < n; i++) {
+        infotype x;
+        cout << "\nMasukkan nomor polisi: ";
+        cin >> x.nopol;
+        cout << "Masukkan warna kendaraan: ";
+        cin >> x.warna;
+        cout << "Masukkan tahun kendaraan: ";
+        cin >> x.thnBuat;
+
+        address P = alokasi(x);
+        insertLast(L, P);
+    }
+
+    cout << "\nDATA LIST\n";
+    printInfo(L);
+
+    string cari;
+    cout << "\nMasukkan nomor polisi yang dicari: ";
+    cin >> cari;
+    address found = findElm(L, cari);
+    if (found != NULL) {
+        cout << "\nData ditemukan:\n";
+        cout << "Nomor Polisi : " << found->info.nopol << endl;
+        cout << "Warna        : " << found->info.warna << endl;
+        cout << "Tahun        : " << found->info.thnBuat << endl;
+    } else {
+        cout << "Data tidak ditemukan.\n";
+    }
+
+    string hapus;
+    cout << "\nMasukkan nomor polisi yang akan dihapus: ";
+    cin >> hapus;
+
+    address del = findElm(L, hapus);
+    address temp;
+
+    if (del == NULL) {
+        cout << "Data tidak ditemukan.\n";
+    } else if (del == L.First) {
+        deleteFirst(L, temp);
+        dealokasi(temp);
+        cout << "Data berhasil dihapus (awal list).\n";
+    } else if (del == L.Last) {
+        deleteLast(L, temp);
+        dealokasi(temp);
+        cout << "Data berhasil dihapus (akhir list).\n";
+    } else {
+        deleteAfter(del->prev, temp);
+        dealokasi(temp);
+        cout << "Data berhasil dihapus (tengah list).\n";
+    }
+
+    cout << "\nDATA LIST SETELAH DIHAPUS\n";
+    printInfo(L);
+
+    return 0;
+}
+```⁠
+Output 
+	⁠![Output Soal 3](https://github.com/chafdv/Modul-6/blob/main/Output/maincpp3.png)
 
 Program ini membuat singly linked list berisi 1 → 2 → 3, lalu membalik urutannya menjadi 3 → 2 → 1 menggunakan 3 pointer (prev, current, next) untuk memutar arah pointer satu per satu.
 
