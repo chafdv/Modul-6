@@ -479,9 +479,15 @@ Kode ini berisi fungsi untuk membuat, menambah, menampilkan, mencari, dan mengha
 ### Soal 3
 
 Hapus elemen dengan nomor polisi D003 dengan procedure delete.
+•⁠  ⁠procedure deleteFirst( input/output L : List,
+ P : address )
+•⁠  ⁠procedure deleteLast( input/output L : List,
+ P : address )
+•⁠  ⁠procedure deleteAfter( input Prec : address,
+ input/output P : address )
 
-⁠```cpp
-#include "doublylist.h"
+```cpp
+#include "DoublyList.h"
 
 int main() {
     List L;
@@ -490,71 +496,68 @@ int main() {
     int n;
     cout << "Masukkan jumlah kendaraan: ";
     cin >> n;
+    cin.ignore();
 
     for (int i = 0; i < n; i++) {
         infotype x;
-        cout << "\nMasukkan nomor polisi: ";
-        cin >> x.nopol;
+        cout << "Masukkan nomor polisi: ";
+        getline(cin, x.nopol);
         cout << "Masukkan warna kendaraan: ";
-        cin >> x.warna;
+        getline(cin, x.warna);
         cout << "Masukkan tahun kendaraan: ";
         cin >> x.thnBuat;
-
-        address P = alokasi(x);
-        insertLast(L, P);
+        cin.ignore();
+        insertLast(L, alokasi(x));
+        cout << endl;
     }
 
-    cout << "\nDATA LIST\n";
+    cout << "\nDATA LIST 1\n";
     printInfo(L);
 
     string cari;
-    cout << "\nMasukkan nomor polisi yang dicari: ";
-    cin >> cari;
+    cout << "Masukkan Nomor Polisi yang dicari: ";
+    getline(cin, cari);
     address found = findElm(L, cari);
-    if (found != NULL) {
-        cout << "\nData ditemukan:\n";
-        cout << "Nomor Polisi : " << found->info.nopol << endl;
+    if (found != nullptr) {
+        cout << "\nNomor Polisi : " << found->info.nopol << endl;
         cout << "Warna        : " << found->info.warna << endl;
         cout << "Tahun        : " << found->info.thnBuat << endl;
     } else {
-        cout << "Data tidak ditemukan.\n";
+        cout << "\nData tidak ditemukan.\n";
     }
 
+    cout << "\nMasukkan Nomor Polisi yang akan dihapus: ";
     string hapus;
-    cout << "\nMasukkan nomor polisi yang akan dihapus: ";
-    cin >> hapus;
+    getline(cin, hapus);
 
     address del = findElm(L, hapus);
-    address temp;
-
-    if (del == NULL) {
-        cout << "Data tidak ditemukan.\n";
-    } else if (del == L.First) {
-        deleteFirst(L, temp);
-        dealokasi(temp);
-        cout << "Data berhasil dihapus (awal list).\n";
-    } else if (del == L.Last) {
-        deleteLast(L, temp);
-        dealokasi(temp);
-        cout << "Data berhasil dihapus (akhir list).\n";
+    if (del != nullptr) {
+        address P;
+        if (del == L.First) {
+            deleteFirst(L, P);
+        } else if (del == L.Last) {
+            deleteLast(L, P);
+        } else {
+            deleteAfter(del->prev, P);
+        }
+        cout << "Data dengan nomor polisi " << hapus << " berhasil dihapus.\n";
+        dealokasi(P);
     } else {
-        deleteAfter(del->prev, temp);
-        dealokasi(temp);
-        cout << "Data berhasil dihapus (tengah list).\n";
+        cout << "Data tidak ditemukan.\n";
     }
 
-    cout << "\nDATA LIST SETELAH DIHAPUS\n";
+    cout << "\nDATA LIST 1 SETELAH HAPUS:\n";
     printInfo(L);
 
     return 0;
 }
 
 ```
-
+ 
 Output 
 	⁠![Output Soal 3](https://github.com/chafdv/Modul-6/blob/main/Output/maincpp3.png)
 
-Kode tersebut berfungsi untuk mengelola data kendaraan menggunakan **doubly linked list**. Program meminta pengguna memasukkan beberapa data kendaraan, lalu menampilkannya. Setelah itu, pengguna dapat mencari data berdasarkan nomor polisi dan menghapus data tersebut baik di awal, tengah, maupun akhir list.
+Kode tersebut berfungsi untuk mengelola data kendaraan menggunakan doubly linked list. Program meminta pengguna memasukkan beberapa data kendaraan, lalu menampilkannya. Setelah itu, pengguna dapat mencari data berdasarkan nomor polisi dan menghapus data tersebut baik di awal, tengah, maupun akhir list.
 
 ## Referensi
 
